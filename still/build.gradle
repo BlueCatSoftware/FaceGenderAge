@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 32
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName version
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.0'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'com.google.mlkit:face-detection:16.1.5'
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
+    implementation 'com.github.darwinfrancis:viola-age:1.0.2'
+
+    implementation project(":genderDetector")
+
+    releaseImplementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7")
+    releaseImplementation 'androidx.core:core-ktx:1.3.2'
+    releaseImplementation 'com.google.mlkit:face-detection:16.1.5'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
